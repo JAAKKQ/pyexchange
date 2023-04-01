@@ -6,7 +6,7 @@ data = jsonBase("./data")
 
 def send_function(*args):
     # Implement the logic for buying here
-    user, userTo, amount, currency = args
+    user, userTo, amount, currency, message = args
     amount = abs(float(amount))
     myBal = data.load(user, currency)
     if myBal >= amount:
@@ -18,7 +18,8 @@ def send_function(*args):
         output = {
             "status": "success",
             "amount": amount,
-            "currency": currency
+            "currency": currency,
+            "message": message
         }
         return output
     else:

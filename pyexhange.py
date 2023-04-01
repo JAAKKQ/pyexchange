@@ -3,7 +3,6 @@ import os
 from modules import trade
 from modules import send
 from modules import wallet
-from modules import info
 from modules.utils.data import *
 
 data = jsonBase("./data")
@@ -12,8 +11,7 @@ data = jsonBase("./data")
 commands = {
     "trade": trade.trade_function,
     "send": send.send_function,
-    "wallet": wallet.wallet_function,
-    "info": info.info_function
+    "wallet": wallet.wallet_function
 }
 
 # Define a function to handle user input and execute the corresponding command
@@ -23,8 +21,11 @@ def handle_command(user_input):
     command = command_list[0]
     args = command_list[1:]
 
-    if not os.path.exists('./data/' + args[0] + ".json"):
-        data.save(args[0], "USD", 2000)
+    #Add start money
+    money_redeemed = data.load(args[0], "redeemed?") or False
+    if not money_redeemed:
+        usdBal = data.load(args[0], "usd")
+        data.save(args[0], "usd", usdBal + 2000)
     # Call the corresponding function based on the command
     if command in commands:
         return commands[command](*args)
