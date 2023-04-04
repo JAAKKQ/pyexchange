@@ -1,12 +1,15 @@
 from modules.utils.finhub import *
 from modules.utils.data import *
-import json
 
 data = jsonBase("./data")
 
 def send_function(*args):
-    # Implement the logic for buying here
+    # Check if number of arguments is correct
+    if len(args) != 5:
+        return {"status": "failed", "error_code": "INVALID_ARGUMENTS", "error": "Invalid arguments. Usage: send [user] [user_to] [amount] [currency] [message]"}
+
     user, userTo, amount, currency, message = args
+    currency = currency.upper()
     amount = abs(float(amount))
     myBal = data.load(user, currency)
     if myBal >= amount:
@@ -23,7 +26,4 @@ def send_function(*args):
         }
         return output
     else:
-        output = {
-            "status": "failed"
-        }
-        return output
+        return {"status": "failed", "error_code": "INSUFFICIENT_FUNDS", "error": "Insufficient funds."}
