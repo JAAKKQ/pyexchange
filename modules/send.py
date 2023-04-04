@@ -21,6 +21,7 @@ def send_function(*args):
         output = {
             "status": "success",
             "amount": amount,
+            "userTo": userTo,
             "currency": currency,
             "message": message
         }
