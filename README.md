@@ -1,12 +1,10 @@
 # PyExhange
 
-Welcome to Crypto Trader Game! In this game, you will start with a set amount of money and use it to buy and sell various cryptocurrencies.
+This code is a Python implementation of a basic wallet system that allows users to buy, sell, and transfer currencies. It includes a JSON database to store user information and currency balances. The code is licensed under the MIT license.
 
 # Installation
 ```
-git clone https://github.com/JAAKKQ/pyexhange.git
-cd pyexhange
-pip install -r requirements.txt
+pip install pyexhange-r3ne
 ```
 
 # Usage
