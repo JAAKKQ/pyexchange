@@ -14,9 +14,7 @@ import os
 import time
 import finnhub
 
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-
-with open(os.path.join(root_dir, "config.json")) as f:
+with open(os.path.join("./config.json")) as f:
     config = json.load(f)
     api_key = config["finhub_key"]
     finnhub_client = finnhub.Client(api_key=api_key)

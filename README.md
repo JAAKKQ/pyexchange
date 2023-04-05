@@ -4,7 +4,7 @@ This code is a Python implementation of a basic wallet system that allows users 
 
 # Installation
 ```
-pip install pyexhange-r3ne
+py -m pip install pyexhange-r3ne
 ```
 
 # Usage
