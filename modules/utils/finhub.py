@@ -22,7 +22,7 @@ with open(os.path.join("./config.json")) as f:
 # Dictionary to store cached prices
 cache = {}
 
-def get_crypto_price(crypto_symbol):
+def finhub_get_crypto_price(crypto_symbol):
     crypto_symbol = crypto_symbol.upper()
     try:
         timestamp = int(time.time())
@@ -33,12 +33,5 @@ def get_crypto_price(crypto_symbol):
         cache[crypto_symbol] = current_price
         
         return current_price
-    except finnhub.exceptions.FinnhubAPIException as e:
-        # If rate limited, return the cached price
-        if e.http_status == 429:
-            if crypto_symbol in cache:
-                return cache[crypto_symbol]
-            else:
-                return None
-        else:
-            return None
+    except:
+        return None

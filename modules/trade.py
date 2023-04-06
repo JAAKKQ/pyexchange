@@ -9,7 +9,7 @@ copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
 '''
 
-from modules.utils.finhub import *
+from modules.utils.exchanges import *
 from modules.utils.data import *
 
 data = jsonBase("./data")
