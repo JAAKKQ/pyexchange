@@ -1,12 +1,5 @@
 '''
 Copyright (c) 2023 R3ne.net
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
 '''
 
 import os
@@ -35,7 +28,7 @@ def handle_command(user_input):
         command = command_list[0]
         args = command_list[1:]
     except:
-        return {"status": "error", "error_code": "FIELD_EMPTY", "error_message": "Field is empty"}
+        return {"status": "error", "error_code": "FIELD_EMPTY", "error": "Field is empty"}
 
     if command in commands:
         try:
@@ -46,9 +39,9 @@ def handle_command(user_input):
                 data.save(args[0], "redeemed?", True)
             return commands[command](*args)
         except Exception as e:
-            return {"status": "error", "error_code": "UNKNOWN_ERROR", "error_message": str(e)}
+            return {"status": "error", "error_code": "UNKNOWN_ERROR", "error": str(e)}
     else:
-        return {"status": "error", "error_code": "INVALID_COMMAND", "error_message": "Invalid command"}
+        return {"status": "error", "error_code": "INVALID_COMMAND", "error": "Invalid command"}
 
 
 def main():

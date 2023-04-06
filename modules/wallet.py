@@ -1,15 +1,9 @@
 '''
 Copyright (c) 2023 R3ne.net
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
 '''
 
 from modules.utils.data import *
+from modules.utils.exchanges import *
 
 data = jsonBase("./data")
 
@@ -19,7 +13,11 @@ def wallet_function(*args):
 
     user, currency = args
     currency = currency.upper()
-    amount = data.load(user, currency)
+    curdata = get_data(currency)
 
-    output = {"status": "success", "amount": amount, "currency": currency}
+    if curdata == None:
+        curdata = {"price": 0, "symbol":"CRYPTO"}
+    amount = data.load(user, curdata['symbol'])
+
+    output = {"status": "success", "amount": amount,"price": curdata['price'] * amount, "currency": curdata['symbol']}
     return output

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pyexhange_r3ne"
-version = "0.1.2"
+version = "0.1.8"
 authors = [
   { name="R3ne.net", email="mail@r3ne.net" },
 ]

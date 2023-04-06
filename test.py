@@ -13,4 +13,4 @@ print(pyexhange.handle_command("send 1 2 100 USD There_you_go"))
 print(pyexhange.handle_command("send 2 1 100 USD There_you_go"))
 
 #Price of Bitcoin currently
-print(pyexhange.handle_command("price btc"))
+print(pyexhange.handle_command("price system btc"))
