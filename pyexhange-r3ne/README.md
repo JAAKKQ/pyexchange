@@ -4,7 +4,7 @@ This code is a Python implementation of a basic wallet system that allows users 
 
 # Installation
 ```
-py -m pip install pyexhange-r3ne
+pip install pyexhange-r3ne
 ```
 
 # Usage
@@ -12,7 +12,7 @@ This can be integrated to any interface (Websites, Telegram, Discord, etc.) with
 
 Example:
 ```python
-import pyexhange
+from pyexhange import pyexhange
 
 #Buy 1 Ethereum
 print(pyexhange.handle_command("trade 1 1 eth"))

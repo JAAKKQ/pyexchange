@@ -21,17 +21,44 @@ def trade_function(*args):
     user, amount, currency = args
     currency = currency.upper()
     try:
-        cost = get_crypto_price(currency) * float(amount)
+        if float(amount) < 0:
+            # If amount is negative, we are selling, so check if user has enough of the currency
+            walletBal = data.load(user, currency)
+            if walletBal < abs(float(amount)):
+                return {"status": "failed", "error_code": "INSUFFICIENT_FUNDS", "error": f"Insufficient {currency} funds"}
+        cost = get_crypto_price(currency) * abs(float(amount))
         usdBal = data.load(user, "USD")
-        walletBal = data.load(user, currency)
     except KeyError:
         return {"status": "failed", "error_code": "NO_CURRENCY_FOUND", "error": f"{currency} could not be found from the database."}
     except TypeError:
         return {"status": "failed", "error_code": "INVALID_AMOUNT", "error": "Invalid input for amount"}
 
-    if usdBal >= cost:
-        usdBal -= cost
-        walletBal += float(amount)
+    if float(amount) > 0:
+        # If amount is positive, we are buying
+        if usdBal >= cost:
+            usdBal -= cost
+            walletBal = data.load(user, currency)
+            walletBal += float(amount)
+            data.save(user, "USD", usdBal)
+            data.save(user, currency, walletBal, "CRYPTO")
+            output = {
+                "status": "success",
+                "amount": amount,
+                "currency": currency,
+                "cost": cost
+            }
+            return output
+        else:
+            output = {
+                "status": "failed",
+                "error_code": "INSUFFICIENT_FUNDS",
+                "error": "Insufficient USD funds"
+            }
+            return output
+    else:
+        # If amount is negative, we are selling
+        usdBal += cost
+        walletBal -= abs(float(amount))
         data.save(user, "USD", usdBal)
         data.save(user, currency, walletBal, "CRYPTO")
         output = {
@@ -41,10 +68,4 @@ def trade_function(*args):
             "cost": cost
         }
         return output
-    else:
-        output = {
-            "status": "failed",
-            "error_code": "INSUFFICIENT_FUNDS",
-            "error": "Insufficient funds"
-        }
-        return output
+
