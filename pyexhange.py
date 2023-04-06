@@ -20,7 +20,7 @@ except FileNotFoundError:
 
 commands = {}
 
-for filename in os.listdir("modules"):
+for filename in os.listdir(os.path.join(os.path.dirname(__file__), "modules")):
     if filename.endswith(".py"):
         module_name = filename[:-3] # remove .py extension
         module = importlib.import_module("modules." + module_name)
