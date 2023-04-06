@@ -26,10 +26,12 @@ def trade_function(*args):
             walletBal = data.load(user, currency)
             if walletBal < abs(float(amount)):
                 return {"status": "failed", "error_code": "INSUFFICIENT_FUNDS", "error": f"Insufficient {currency} funds"}
-        cost = get_crypto_price(currency) * abs(float(amount))
+        cost = get_price(currency)
         usdBal = data.load(user, "USD")
-    except KeyError:
-        return {"status": "failed", "error_code": "NO_CURRENCY_FOUND", "error": f"{currency} could not be found from the database."}
+        if cost == None:
+            return {"status": "failed", "error_code": "NO_CURRENCY_FOUND", "error": f"{currency} could not be found from the database."}
+        else:
+            cost *= abs(float(amount))
     except TypeError:
         return {"status": "failed", "error_code": "INVALID_AMOUNT", "error": "Invalid input for amount"}
 

@@ -12,7 +12,7 @@ This can be integrated to any interface (Websites, Telegram, Discord, etc.) with
 
 Example:
 ```python
-from pyexhange import pyexhange
+import pyexhange
 
 #Buy 1 Ethereum
 print(pyexhange.handle_command("trade 1 1 eth"))

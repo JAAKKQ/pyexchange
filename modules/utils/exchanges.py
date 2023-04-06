@@ -12,11 +12,14 @@ furnished to do so, subject to the following conditions:
 from modules.utils.finhub import *
 from modules.utils.coingecko import *
 
-def get_crypto_price(crypto):
+def get_price(crypto):
+    #Maybe stonks too?!?!
     finhub_price = finhub_get_crypto_price(crypto)
     coingecko_price = coingecko_get_crypto_price(crypto)
+    price = None
 
     if finhub_price == None:
-        return coingecko_price
-    else:
-        return finhub_price
+        price = coingecko_price
+    elif coingecko_price == None:
+        price = finhub_price
+    return float(price)

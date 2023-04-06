@@ -9,9 +9,8 @@ copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
 '''
 
-from modules import trade
-from modules import send
-from modules import wallet
+import os
+import importlib
 from modules.utils.data import *
 
 try:
@@ -19,11 +18,15 @@ try:
 except FileNotFoundError:
     print("JSON file not found.")
 
-commands = {
-    "trade": trade.trade_function,
-    "send": send.send_function,
-    "wallet": wallet.wallet_function
-}
+commands = {}
+
+for filename in os.listdir("modules"):
+    if filename.endswith(".py"):
+        module_name = filename[:-3] # remove .py extension
+        module = importlib.import_module("modules." + module_name)
+        if hasattr(module, module_name + "_function"):
+            commands[module_name] = getattr(module, module_name + "_function")
+
 
 
 def handle_command(user_input):

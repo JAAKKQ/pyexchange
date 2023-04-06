@@ -9,15 +9,18 @@ copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
 '''
 
-from pycoingecko import CoinGeckoAPI
+from modules.utils.data import *
+from modules.utils.exchanges import *
 
-cg = CoinGeckoAPI()
+def price_function(*args):
+    if len(args) != 1:
+        return {"status": "failed", "error_code": "INVALID_ARGUMENTS", "error": "Invalid arguments. Usage: price [currency]"}
+    currency = args[0].upper()
 
-def coingecko_get_crypto_price(crypto_name):
-    crypto_name = crypto_name.lower()
-    try:
-        current_price = cg.get_price(ids=crypto_name, vs_currencies='usd')[crypto_name]['usd']
+    output = {
+    "status": "success",
+    "price": get_price(currency),
+    "currency": currency,
+    }
 
-        return current_price
-    except:
-        return None
+    return output
