@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling", "finnhub-python"]
+requires = ["hatchling", "finnhub-python", "pycoingecko"]
 build-backend = "hatchling.build"
 
 [project]
