@@ -17,7 +17,10 @@ def wallet_function(*args):
 
     if curdata == None:
         curdata = {"price": 0, "symbol":"CRYPTO"}
-    amount = data.load(user, curdata['symbol'])
+    if currency == "USD":
+        amount = data.load(user, "USD")
+    else:
+        amount = data.load(user, curdata['symbol'])
 
     output = {"status": "success", "amount": amount,"price": curdata['price'] * amount, "currency": curdata['symbol']}
     return output

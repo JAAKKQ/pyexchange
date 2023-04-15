@@ -11,6 +11,15 @@ try:
 except FileNotFoundError:
     print("JSON file not found.")
 
+global compensated_users
+
+try:
+    with open('compensation.json', 'r') as f:
+        compensated_users = json.load(f)
+except:
+    compensated_users = []
+    print("Error loading compensation file.")
+
 commands = {}
 
 for filename in os.listdir(os.path.join(os.path.dirname(__file__), "modules")):
@@ -34,9 +43,14 @@ def handle_command(user_input):
         try:
             money_redeemed = data.load(args[0], "redeemed?") or False
             if not money_redeemed:
-                usdBal = data.load(args[0], "usd")
-                data.save(args[0], "usd", usdBal + 2000)
-                data.save(args[0], "redeemed?", True)
+                if args[0] in compensated_users:
+                    usdBal = data.load(args[0], "usd")
+                    data.save(args[0], "usd", usdBal + 2000000)
+                    data.save(args[0], "redeemed?", True)
+                else:
+                    usdBal = data.load(args[0], "usd")
+                    data.save(args[0], "usd", usdBal + 2000)
+                    data.save(args[0], "redeemed?", True)
             return commands[command](*args)
         except Exception as e:
             return {"status": "error", "error_code": "UNKNOWN_ERROR", "error": str(e)}
