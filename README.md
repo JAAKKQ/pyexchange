@@ -41,11 +41,19 @@ pip install -r .\requirements.txt
 ```
 4. Run python .\pyexhange.py
 ### Commands
-As user id 1 buy 1 Ethereum:
+As user 1 buy 1 Ethereum:
 ```
 trade 1 1 eth
 ```
-As user id 1 sell 1 Ethereum:
+As user 1 sell 1 Ethereum:
 ```
 trade 1 -1 eth
+```
+As user 1 send 100 dollars to user 2 and add a message: "This Is A Message"
+```
+send 1 2 100 USD This_Is_A_Message"
+```
+As user 1 view how many dollars you have
+```
+wallet 1 usd
 ```
