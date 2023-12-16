@@ -2,12 +2,12 @@
 
 This code is a Python implementation of a basic wallet system that allows users to buy, sell, and transfer currencies. It includes a JSON database to store user information and currency balances. The code is licensed under the MIT license.
 
-# Installation
+## Dependency Installation
 ```
 pip install pyexhange-r3ne
 ```
 
-# Usage
+### Usage
 This can be integrated to any interface (Websites, Telegram, Discord, etc.) with ease.
 
 Example:
@@ -22,4 +22,30 @@ print(pyexhange.handle_command("trade 1 -1 eth"))
 
 #As user 1 send 100 dollars to user 2
 print(pyexhange.handle_command("send 1 2 100 USD This_Is_A_Message"))
+```
+## Testing Installation
+
+1. Clone this repo
+```
+git clone https://github.com/JAAKKQ/pyexhange
+```
+2. Install requirements
+```
+pip install -r .\requirements.txt
+```
+3. Edit config.json
+```
+{
+    "finhub_key": "your key"
+}
+```
+4. Run python .\pyexhange.py
+### Commands
+As user id 1 buy 1 Ethereum:
+```
+trade 1 1 eth
+```
+As user id 1 sell 1 Ethereum:
+```
+trade 1 -1 eth
 ```
