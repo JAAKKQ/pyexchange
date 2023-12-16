@@ -1,5 +1,5 @@
 '''
-Copyright (c) 2023 R3ne.net
+Copyright (c) 2023 Rene Karkkainen
 '''
 
 from pycoingecko import CoinGeckoAPI
