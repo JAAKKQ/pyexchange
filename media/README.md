@@ -2,6 +2,12 @@ This Python code serves as a comprehensive implementation of a rudimentary yet f
 
 
 ## Features and Functionality
+You can trade with over 11000 cryptocurrencies including Bitcoin and Ethereum.
+#### Check price of Ethereum
+```
+price system ethereum
+```
+The system will respond with the current price of Ethereum, allowing users to factor in this information when contemplating buy or sell transactions involving Ethereum.
 #### Buy Ethereum
 To initiate a purchase of Ethereum, User 1 can employ the following command:
 ```
