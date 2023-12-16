@@ -13,6 +13,5 @@ def get_data(crypto):
 
     if finhub_price == None:
         price = coingecko_price
-    if coingecko_price == None:
-        price = finhub_price
+
     return price

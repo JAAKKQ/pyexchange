@@ -3,6 +3,7 @@ Copyright (c) 2023 Rene Karkkainen
 '''
 
 from modules.utils.data import *
+from modules.utils.exchanges import *
 
 data = jsonBase("./data")
 
@@ -12,7 +13,7 @@ def send_function(*args):
         return {"status": "failed", "error_code": "INVALID_ARGUMENTS", "error": "Invalid arguments. Usage: send [user] [user_to] [amount] [currency] [message]"}
 
     user, userTo, amount, currency, message = args
-    currency = currency.upper()
+    currency = get_data(currency.upper())['symbol']
     amount = abs(float(amount))
     myBal = data.load(user, currency)
     if myBal >= amount:

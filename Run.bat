@@ -1,2 +1,2 @@
-py ./pyexhange.py
+python ./pyexhange.py
 pause [enter]
